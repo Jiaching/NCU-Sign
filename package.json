@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/john29917958/NCU-Sign/issues"
   },
-  "homepage": "https://github.com/john29917958/NCU-Sign#readme"
+  "homepage": "https://github.com/john29917958/NCU-Sign#readme",
+  "dependencies": {
+    "zombie": "^5.0.5"
+  }
 }
