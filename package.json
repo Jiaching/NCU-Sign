@@ -1,0 +1,19 @@
+{
+  "name": "ncu-sign",
+  "version": "1.0.0",
+  "description": "'A Node.js APP for automatically signs the \"Part Time Assistant / Contractor / Temporary Personal\" system.'",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/john29917958/NCU-Sign.git"
+  },
+  "author": "John Wang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/john29917958/NCU-Sign/issues"
+  },
+  "homepage": "https://github.com/john29917958/NCU-Sign#readme"
+}
