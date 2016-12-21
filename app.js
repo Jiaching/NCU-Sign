@@ -7,9 +7,11 @@ var Browser = require('zombie'),
 	portalPassword = '',
 	browser = new Browser();
 
-browser.visit(portalUrl).then(function () {
-	logInNcuHumanSystem(browser);
-});
+function doSign() {
+	browser.visit(portalUrl).then(function () {
+		logInNcuHumanSystem(browser);
+	});
+}
 
 function logInNcuHumanSystem(browser) {
 	browser.visit('http://human.is.ncu.edu.tw/HumanSys/').then(function () {
@@ -46,8 +48,15 @@ function logInPortal(browser, portalId, portalPassword) {
 function goToSignInOutPage(browser) {
 	browser.clickLink('a[href="http://human.is.ncu.edu.tw/HumanSys/student/stdSignIn"]', function () {
 		browser.clickLink('a[href="stdSignIn/create?ParttimeUsuallyId=26627"]', function () {
-			signIn(browser);
-			signOut(browser);
+			if (browser.query('input[id="signin"]').disabled) {
+				signOut(browser);
+			}
+			else if (browser.query('input[id="signout"]').disabled) {
+				signIn(browser);
+			}
+			else {
+				console.error('NCU system may broken...');
+			}
 		});
 	});
 }
@@ -77,3 +86,5 @@ function signOut(browser) {
 		});
 	}
 }
+
+module.exports = doSign;
