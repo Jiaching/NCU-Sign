@@ -1,5 +1,5 @@
 # NCU-Sign
-A Node.js APP for automatically signing in / out from the NCU Personnel System.
+A Node.js APP for automatically signing in / out from the [NCU Personnel System](http://human.is.ncu.edu.tw/HumanSys/).
 
 ## Prerequisite
 1. Install [PhantomJS](http://phantomjs.org/) (maybe via [NPM](https://www.npmjs.com/package/phantomjs))
