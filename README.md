@@ -1,5 +1,5 @@
 # NCU-Sign
-A Node.js APP for automatically signs the "Part Time Assistant / Contractor / Temporary Personal" system.
+A Node.js APP for automatically signing in / out from the NCU Personnel System.
 
 ## Prerequisite
 1. Install [PhantomJS](http://phantomjs.org/) (maybe via [NPM](https://www.npmjs.com/package/phantomjs))
