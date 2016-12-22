@@ -66,19 +66,7 @@ var sign = (function () {
 
 		logInPortal(portalId, portalPassword);
 	}
-	/*
-	function logOutPortal(browser) {
-		console.log('Try log out from portal');
-
-		browser.visit(portalUrl).then(function () {
-			browser.pressButton('a[href="/logout"]', function () {
-				console.log('Logged out from NCU portal');
-			});
-		}).fail(function () {
-			console.log('Log out from portal failed.');
-		});
-	}
-	*/
+	
 	function logInPortal(portalId, portalPassword) {
 		casper.then(function () {
 			console.log('Try to log in into portal');
