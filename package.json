@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/john29917958/NCU-Sign#readme",
   "dependencies": {
-    "zombie": "^5.0.5"
+    "casperjs": "^1.1.3"
   }
 }
