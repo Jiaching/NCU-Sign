@@ -7,4 +7,4 @@ A Node.js APP for automatically signs the "Part Time Assistant / Contractor / Te
 3. Download this project
 4. Here you go!
 
-Usage: `casperjs ncu-sign.js`
+Usage: `casperjs ncu-sign.js [sign-in / sign-out] [YOUR-PORTAL-ID] [YOUR-PORTAL-PASSWORD]`
