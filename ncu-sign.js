@@ -1,35 +1,4 @@
-var action = '',//process.argv[2],
-	portalId = '',//process.argv[3],
-	portalPassword = '';//process.argv[4],
-
-function checkArgs() {
-	if (!action) {
-		console.error('NCU-Sign usage:\nnode app.js ["sign-in" / "sign-out"] [PORTAL-ID] [PORTAL-PASSWORD].');
-		return false;
-	}
-
-	if (portalId === undefined || portalId === null || portalId.length === 0) {
-		console.error('Please specify your portal ID');
-		return false;
-	}
-
-	if (portalPassword === undefined || portalPassword === null || portalPassword.length === 0) {
-		console.error('Please specify your portal password');
-		return false;
-	}
-
-	switch (action) {
-		case 'sign-in':
-		case 'sign-out':
-			return true;
-		default:
-			console.error('Unsupported action.\nThe action should be "sign-in" or "sign-out".');
-			return false;
-	}
-}
-
-var sign = (function () {
-	var casper = require('casper').create({
+var casper = require('casper').create({
 		onTimeout: function () {
 			console.log('Timed out: ' + this.getCurrentUrl());
 		},
@@ -41,11 +10,36 @@ var sign = (function () {
 		},
 		viewportSize: { width: 1024, height: 768 }
 	}),
-	signUrl = 'http://human.is.ncu.edu.tw/HumanSys/',
-	logInUrl = 'http://human.is.ncu.edu.tw/HumanSys/login',
-	portalId = '',
-	portalPassword = '',
-	action;
+	action = casper.cli.args[0],
+	portalId = casper.cli.args[1],
+	portalPassword = casper.cli.args[2];
+
+function checkArgs() {
+	if (action !== 'sign-in' && action !== 'sign-out') {
+		console.log('Unsupported action "' + action + '".\nThe action should be "sign-in" or "sign-out".');
+		console.log('NCU-Sign usage:\nnode app.js ["sign-in" / "sign-out"] [PORTAL-ID] [PORTAL-PASSWORD].');
+		casper.exit();
+	}
+
+	if (portalId === undefined || portalId === null || portalId.length === 0) {
+		console.log('Please specify your portal ID');
+		console.log('NCU-Sign usage:\nnode app.js ["sign-in" / "sign-out"] [PORTAL-ID] [PORTAL-PASSWORD].');
+		casper.exit();
+	}
+
+	if (portalPassword === undefined || portalPassword === null || portalPassword.length === 0) {
+		console.log('Please specify your portal password');
+		console.log('NCU-Sign usage:\nnode app.js ["sign-in" / "sign-out"] [PORTAL-ID] [PORTAL-PASSWORD].');
+		casper.exit();
+	}
+}
+
+var sign = (function () {
+	var signUrl = 'http://human.is.ncu.edu.tw/HumanSys/',
+		logInUrl = 'http://human.is.ncu.edu.tw/HumanSys/login',
+		portalId = '',
+		portalPassword = '',
+		action;
 
 	function main(acct, pwd) {
 		portalId = acct;
@@ -61,9 +55,7 @@ var sign = (function () {
 
 		casper.start(signUrl, function () {
 			console.log('Try to open NCU human system');
-			this.waitForSelector(logInLink, function () {
-				this.capture('NCU-Human-System.png');
-			});
+			this.waitForSelector(logInLink);
 		});
 
 		casper.then(function () {
@@ -197,15 +189,17 @@ var sign = (function () {
 	};
 })();
 
-if (checkArgs()) {
-	switch (action) {
-		case 'sign-in':
-			sign.signIn(portalId, portalPassword);
-			break;
-		case 'sign-out':
-			sign.signOut(portalId, portalPassword);
-			break;
-		default:
-			console.error('Unsupported action.\nThe action should be "sign-in" or "sign-out".');
-	}
+checkArgs()
+
+switch (action) {
+	case 'sign-in':
+		console.log('About to sign in into NCU Human System...');
+		sign.signIn(portalId, portalPassword);
+		break;
+	case 'sign-out':
+		console.log('About to sign out from NCU Human System...');
+		sign.signOut(portalId, portalPassword);
+		break;
+	default:
+		console.error('Unsupported action.\nThe action should be "sign-in" or "sign-out".');
 }
