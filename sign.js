@@ -1,33 +1,39 @@
-var Browser = require('zombie'),
-	portalUrl = 'https://portal.ncu.edu.tw',
-	portalAlreadyLoggedInUrl = 'https://portal.ncu.edu.tw/system/120',
-	portalRequireLogInUrl = 'https://portal.ncu.edu.tw/login',
+var casper = require('casper').create(),
 	signUrl = 'http://human.is.ncu.edu.tw/HumanSys/',
 	portalId = '',
 	portalPassword = '',
-	browser = new Browser({ waitDuration: 10000 }),
 	action;
 
 function signIn(acct, pwd) {
 	action = 'signIn';
 	portalId = acct;
 	portalPassword = pwd;
+	
 	logInNcuHumanSystem();
+
+	casper.run();
 }
 
 function signOut(acct, pwd) {
 	action = 'signOut';
 	portalId = acct;
 	portalPassword = pwd;
+
 	logInNcuHumanSystem();
+
+	casper.run();
 }
 
 function logInNcuHumanSystem() {
-	browser.visit('http://human.is.ncu.edu.tw/HumanSys/').then(function () {
-		browser.clickLink('a[href="http://human.is.ncu.edu.tw/HumanSys/login"]', function () {
-			logInPortal(portalId, portalPassword);
-		});
+	casper.start(signUrl, function () {
+		this.waitForSelector('a[href="' + signUrl + '"]');
 	});
+
+	casper.then(function () {
+		this.click('a[href="' + signUrl + '"]');
+	});
+
+	logInPortal(portalId, portalPassword);
 }
 /*
 function logOutPortal(browser) {
@@ -44,62 +50,105 @@ function logOutPortal(browser) {
 */
 function logInPortal(portalId, portalPassword) {
 	console.log('Try log in into portal');
-	browser.wait(function () {
-		browser.
-		fill('j_username', portalId).
-		fill('j_password', portalPassword).
-		pressButton('Login', function () {
-			console.log('Log in into portal succeeded.');
-			browser.wait().then(goToSignInOutPage);
-		});
+
+	casper.then(function () {
+		this.waitForSelector('input[name="j_password"]');
 	});
+
+	casper.then(function () {
+		this.fillSelectors('form[name="f"]', {
+			'input[name="j_username"]': portalId,
+			'input[name="j_password"]': portalPassword
+		}, true);
+	});
+	
+	casper.then(function () {
+		console.log('Log in into portal succeeded.');
+	});
+
+	goToSignInOutPage();
 }
 
 function goToSignInOutPage() {
-	browser.wait(function () {
-		browser.clickLink('a[href="http://human.is.ncu.edu.tw/HumanSys/student/stdSignIn"]', function () {
-			browser.wait(function () {
-				browser.clickLink('a[href="stdSignIn/create?ParttimeUsuallyId=26627"]', function () {
-					browser.wait(function () {
-						switch (action) {
-							case 'signIn':
-								browser.wait(doSignIn);
-								break;
-							case 'signOut':
-								browser.wait(doSignOut);
-								break;
-							default:
-								console.error("Unsupported action: " + action);
-						}
-					});
-				});
-			});
-		});
+	var signInLink = 'a[href="http://human.is.ncu.edu.tw/HumanSys/student/stdSignIn"]',
+		signInProject = 'a[href="stdSignIn/create?ParttimeUsuallyId=26627"]';
+
+	casper.then(function () {
+		this.waitForSelector(link);
 	});
+
+	casper.then(function () {
+		this.click(link);
+	});
+
+	casper.then(function () {
+		this.waitForSelector(signInProject);
+	});
+
+	casper.then(function () {
+		this.click(signInProject);
+	});
+
+	switch (action) {
+		case 'signIn':
+			doSignIn();
+			break;
+		case 'signOut':
+			doSignOut();
+			break;
+		default:
+			console.error("Unsupported action: " + action);
+	}
 }
 
 function doSignIn() {
-	if (browser.query('input[id="signin"]').disabled) {
-		console.log('User "' + portalId + '" already signed in');
-	}
-	else {
-		browser.pressButton('input[id="signin"]', function () {
+	var signInSelector = 'input[id="signin"]';
+
+	casper.then(function () {
+		this.waitForSelector(signInSelector);
+	});
+
+	casper.then(function () {
+		var signInButton = document.querySelector(signInSelector);
+
+		if (signInButton.disabled) {
+			console.log('User "' + portalId + '" already signed in');	
+		}
+		else {
+			this.click(signInSelector);
 			console.log('User "' + portalId + '" successfully signed in');
-		});
-	}
+		}
+	});
 }
 
 function doSignOut() {
-	if (browser.query('input[id="signout"]').disabled) {
-		console.log('User "' + portalId + '" already signed out');
-	}
-	else {
-		browser.
-		fill('textarea[id="AttendWork"]', '研究助理兼軟體開發').
-		pressButton('input[id="signout"]', function () {
+	var signOutSelector = 'input[id="signout"]',
+		shouldSign = false;
+
+	casper.then(function () {
+		this.waitForSelector(signOutSelector);
+	});
+
+	casper.then(function () {
+		var signOutButton = document.querySelector(signOutSelector);
+
+		if (signOutButton.disabled) {
+			console.log('User "' + portalId + '" already signed out');
+		}
+		else {
+			this.fillSelectors('', {
+				'textarea[id="AttendWork"]': '研究助理兼軟體開發'
+			}, false);
+			shouldSign = true;
+		}
+	});
+
+	casper.then(function () {
+		if (shouldSign) {
+			this.click(signOutSelector);
 			console.log('User "' + portalId + '" successfully signed out!');
-		});
-	}
+		}
+	});
 }
 
 module.exports = {
