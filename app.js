@@ -6,6 +6,8 @@ var signUrl = 'http://human.is.ncu.edu.tw/HumanSys/',
     action;
 
 function main(acct, pwd, job) {
+    var offset = Math.random() * 1000000;
+
     portalId = acct;
     portalPassword = pwd;
     jobId = job;
@@ -26,7 +28,9 @@ function main(acct, pwd, job) {
             casper.exit();
     }
 
-    casper.run();
+    setTimeout(function () {
+        casper.run();
+    }, offset);
 }
 
 function logInNcuHumanSystem() {
