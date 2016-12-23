@@ -6,7 +6,9 @@ var signUrl = 'http://human.is.ncu.edu.tw/HumanSys/',
     action;
 
 function main(acct, pwd, job) {
-    var offset = Math.random() * 1000000;
+    var offsetMin = Math.random() * 10 * 60,
+        offsetSec = Math.random() * 10,
+        offset = (offsetMin + offsetSec) * 1000;
 
     portalId = acct;
     portalPassword = pwd;
