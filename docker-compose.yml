@@ -3,6 +3,7 @@ app:
   container_name: NCU-Sign
   volumes:
     - ./app:/NCU-Sign
+    - ./exec:/NCU-Sign
   ports:
     - "2000:2000"
   tty: true
