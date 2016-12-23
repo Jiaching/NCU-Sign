@@ -4,8 +4,8 @@ A [Casper.js](http://casperjs.org/) APP for automatically signing in / out from 
 ## Installation
 1. Prepare a Linux OS
 2. Install [NPM](https://www.npmjs.com/)
-3. Install [PhantomJS](http://phantomjs.org/) globally via [NPM](https://www.npmjs.com/package/phantomjs))
-4. Install [CasperJS](http://casperjs.org/) globally via [NPM](https://www.npmjs.com/package/casperjs))
+3. Install [PhantomJS](http://phantomjs.org/) globally via [NPM](https://www.npmjs.com/package/phantomjs)
+4. Install [CasperJS](http://casperjs.org/) globally via [NPM](https://www.npmjs.com/package/casperjs)
 5. Download this project or just download [ncu-sign.js](ncu-sign.js)
 6. Here you go!
 
