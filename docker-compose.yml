@@ -2,7 +2,7 @@ app:
   image: cmfatih/phantomjs:latest
   container_name: NCU-Sign
   volumes:
-    - ./app:/NCU-Sign
+    - ./app:/NCU-Sign/app
     - ./exec:/NCU-Sign
   ports:
     - "2000:2000"
