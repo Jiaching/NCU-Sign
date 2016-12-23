@@ -1,0 +1,6 @@
+# m h d M w casperjs /NCU-Sign/ncu-sign.js sign-in PORTAL-ID PORTAL-PASSWORD JOB-ID
+
+# For example:
+# 0 11 * * * casperjs /NCU-Sign/ncu-sign.js sign-out 100502507 MY-PWD 26627
+
+
