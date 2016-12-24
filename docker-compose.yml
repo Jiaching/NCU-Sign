@@ -4,7 +4,4 @@ app:
   volumes:
     - ./app:/NCU-Sign/app
     - ./exec:/NCU-Sign
-  ports:
-    - "2000:2000"
   tty: true
-
