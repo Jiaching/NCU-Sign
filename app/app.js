@@ -5,11 +5,7 @@ var signUrl = 'http://human.is.ncu.edu.tw/HumanSys/',
     jobId = '',
     action;
 
-function main(acct, pwd, job) {
-    var offsetMin = Math.random() * 10 * 60,
-        offsetSec = Math.random() * 10,
-        offset = (offsetMin + offsetSec) * 1000;
-
+function setup(acct, pwd, job) {
     portalId = acct;
     portalPassword = pwd;
     jobId = job;
@@ -17,22 +13,6 @@ function main(acct, pwd, job) {
     logInNcuHumanSystem();
     logInPortal(portalId, portalPassword);
     goToSignInOutPage();
-
-    switch (action) {
-        case 'signIn':
-            doSignIn();
-            break;
-        case 'signOut':
-            doSignOut();
-            break;
-        default:
-            console.log("Unsupported action: " + action);
-            casper.exit();
-    }
-
-    setTimeout(function () {
-        casper.run();
-    }, offset);
 }
 
 function logInNcuHumanSystem() {
@@ -134,14 +114,26 @@ function doSignOut() {
     });
 }
 
+function run() {
+	var offsetMin = Math.random() * 10 * 60,
+        offsetSec = Math.random() * 10,
+        offset = (offsetMin + offsetSec) * 1000;
+
+    setTimeout(function () {
+        casper.run();
+    }, offset);
+}
+
 module.exports = {
     signIn: function (acct, pwd, jobId) {
-        action = 'signIn';
-        main(acct, pwd, jobId);
+        setup(acct, pwd, jobId);
+        doSignIn();
+        run();
     },
     
     signOut: function (acct, pwd, jobId) {
-        action = 'signOut';
-        main(acct, pwd, jobId);
+        setup(acct, pwd, jobId);
+        doSignOut();
+        run();
     }
 };
