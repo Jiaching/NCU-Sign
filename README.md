@@ -45,7 +45,7 @@ casperjs ncu-sign.js [sign-in / sign-out] [YOUR-PORTAL-ID] [YOUR-PORTAL-PASSWORD
 
 For example: `casperjs ncu-sign.js sign-in 100502507 MY-COOL-PASSWORD 26627`
 
-If the above command works, you should see you're already signed in / signed out from the [NCU Personnel System](http://human.is.ncu.edu.tw/HumanSys/).
+If the above command works, you should see you're already signed in to the [NCU Personnel System](http://human.is.ncu.edu.tw/HumanSys/).
 
 Now, there's a [cron.example](exec/cron.example) file under the `exec` directory. It shows an example setup for executing sign in / sign out tasks each day. Feel free to edit this file to meet your needs.
 
