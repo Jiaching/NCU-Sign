@@ -48,9 +48,9 @@ For example:
 casperjs ncu-sign.js sign-in 100502507 MY-COOL-PASSWORD 26627
 ```
 
-If the above command works, you should see you're already signed in to the [NCU Personnel System](http://human.is.ncu.edu.tw/HumanSys/).
+If the above command works, you should see you've already signed in to the [NCU Personnel System](http://human.is.ncu.edu.tw/HumanSys/).
 
-Now, there's a [cron.example](exec/cron.example) file under the `exec` directory. It shows an example setup for executing sign in / sign out tasks as daily / weekly, monthly. or yearly routine. Feel free to copy this file as `cron` and edit it to meet your needs.
+Now, there's a [cron.example](exec/cron.example) file under the `exec` directory. It shows an example setup for executing sign in / sign out tasks as daily / weekly / monthly or yearly routine. Feel free to copy this file as `cron` and edit it to meet your needs.
 
 After you've completed your own crontab file, add these cron jobs you've just completed for sign in / sign out routine:
 ```
@@ -59,4 +59,4 @@ crontab [PATH-TO-YOUR-CRONTAB-FILE]
 Everything done! Enjoy your efficient life!
 
 ## Future Work
-Make it a web app, providing GUI for managing sign in / sign out tasks.
+Make it a web app with convenient GUI for managing sign in / sign out tasks, so that the setup tasks are required only once, then users can take advantage of the beautiful GUI to manage sign in / sign out routines.
