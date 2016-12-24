@@ -41,13 +41,14 @@ Try sign in / sign out from [NCU Personnel System](http://human.is.ncu.edu.tw/Hu
 ```
 casperjs ncu-sign.js [sign-in / sign-out] [YOUR-PORTAL-ID] [YOUR-PORTAL-PASSWORD] [JOB-ID]
 ```
-(the job ID is stored in the "新增簽到" button of NCU Personnel System)
-
-For example: `casperjs ncu-sign.js sign-in 100502507 MY-COOL-PASSWORD 26627`
+The job ID is stored in the "新增簽到" button of NCU Personnel System. For example:
+```
+casperjs ncu-sign.js sign-in 100502507 MY-COOL-PASSWORD 26627
+```
 
 If the above command works, you should see you're already signed in to the [NCU Personnel System](http://human.is.ncu.edu.tw/HumanSys/).
 
-Now, there's a [cron.example](exec/cron.example) file under the `exec` directory. It shows an example setup for executing sign in / sign out tasks each day. Feel free to edit this file to meet your needs.
+Now, there's a [cron.example](exec/cron.example) file under the `exec` directory. It shows an example setup for executing sign in / sign out tasks as daily / weekly, monthly. or yearly routine. Feel free to edit this file to meet your needs.
 
 After you've completed your own crontab file, install `cron` and then add these cron jobs you've just completed for daily sign in / sign out:
 ```
