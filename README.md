@@ -43,7 +43,7 @@ casperjs ncu-sign.js [sign-in / sign-out] [YOUR-PORTAL-ID] [YOUR-PORTAL-PASSWORD
 ```
 (the job ID is stored in the "新增簽到" button of NCU Personnel System)
 
-For example: `casperjs /NCU-Sign/app/ncu-sign.js sign-in 100502507 MY-COOL-PASSWORD 26627`
+For example: `casperjs ncu-sign.js sign-in 100502507 MY-COOL-PASSWORD 26627`
 
 If the above command works, you should see you're already signed in / signed out from the [NCU Personnel System](http://human.is.ncu.edu.tw/HumanSys/).
 
