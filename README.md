@@ -41,7 +41,9 @@ Try sign in / sign out from [NCU Personnel System](http://human.is.ncu.edu.tw/Hu
 ```
 casperjs ncu-sign.js [sign-in / sign-out] [YOUR-PORTAL-ID] [YOUR-PORTAL-PASSWORD] [JOB-ID]
 ```
-The job ID is stored in the "新增簽到" button of NCU Personnel System. For example:
+The job ID is stored in the "新增簽到" button of NCU Personnel System:
+![Job ID location](assets/sign-page.png)
+For example:
 ```
 casperjs ncu-sign.js sign-in 100502507 MY-COOL-PASSWORD 26627
 ```
